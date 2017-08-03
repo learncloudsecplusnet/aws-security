@@ -5,6 +5,12 @@ Ensure this keypair is added to your local SSH agent so provisioners can
 connect.
 Example: ~/.ssh/terraform.pub
 DESCRIPTION
+  default = "C:\Users\admin\.ssh"
+}
+
+variable "shared_credentials_file" {
+  description = "path to AWS credentials"
+  default     = "C:\Users\admin\.aws\credentials"
 }
 
 variable "key_name" {
