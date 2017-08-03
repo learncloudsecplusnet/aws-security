@@ -117,6 +117,19 @@ resource "aws_elb" "web" {
   }
 }
 
+resource "aws_route53_record" "web" {
+  zone_id = "${var.zone_id}"
+  name    = "www.${var.environment}.${var.domain}"
+  type    = "A"
+
+  alias {
+    name    = "${aws_elb.web.dns_name}"
+    zone_id = "${aws_elb.web.zone_id}"
+
+    evaluate_target_health = true
+  }
+}
+
 resource "aws_instance" "web" {
   instance_type = "m1.small"
 

@@ -19,3 +19,13 @@ variable "aws_amis" {
     us-west-2 = "ami-21f78e11"
   }
 }
+
+variable "zone_id" {
+  description = "Route53 Zone ID"
+  default     = "Z1MX3O8HWEIIH4" # Zone ID for celidor.io
+}
+
+variable "domain" {
+  description = "root domain"
+  default     = "celidor.io"
+}
