@@ -115,6 +115,4 @@ resource "aws_instance" "web" {
   # environment it's more common to have a separate private subnet for
   # backend instances.
   subnet_id = "${aws_subnet.default.id}"
-  
-  }
 }
