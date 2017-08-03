@@ -3,16 +3,6 @@ variable "aws_key_name" {
   default = "celidor-training"
 }
 
-variable "shared_credentials_file" {
-  description = "path to AWS credentials"
-  default     = "~/.aws/credentials"
-}
-
-variable "aws_credentials_profile" {
-  description = "profile for AWS credentials"
-  default     = "default"
-}
-
 variable "aws_region" {
   description = "AWS region to launch servers."
   default     = "eu-west-1"
