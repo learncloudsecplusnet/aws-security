@@ -14,9 +14,6 @@ resource "aws_vpc" "aws-security" {
 # Create an internet gateway to give our subnet access to the outside world
 resource "aws_internet_gateway" "aws-security" {
   vpc_id = "${aws_vpc.aws-security.id}"
-  tags {
-    Name = "${var.environment}"
-  }
 }
 
 # Grant the VPC internet access on its main route table
