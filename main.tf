@@ -123,8 +123,8 @@ resource "aws_route53_record" "web" {
   type    = "A"
 
   alias {
-    name    = "${var.aws_elb.web.dns_name}"
-    zone_id = "${var.aws_elb.main.zone_id}"
+    name    = "${aws_elb.web.dns_name}"
+    zone_id = "${aws_elb.main.zone_id}"
 
     evaluate_target_health = true
   }
