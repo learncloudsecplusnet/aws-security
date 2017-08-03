@@ -3,7 +3,7 @@
 packages:
  - nginx-full
 
- runcmd:
-  - service nginx start
+runcmd:
+ - service nginx start
 
 output: { all: '| tee -a /var/log/cloud-init-output.log' }
