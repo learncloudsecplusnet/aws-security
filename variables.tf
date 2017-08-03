@@ -8,6 +8,8 @@ variable "aws_region" {
   default     = "eu-west-1"
 }
 
+variable "environment" {}
+
 # Ubuntu Precise 12.04 LTS (x64)
 variable "aws_amis" {
   default = {

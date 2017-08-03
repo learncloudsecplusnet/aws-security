@@ -14,13 +14,14 @@ To deploy from a Windows 10 environment as the admin user:
 
 ```
 $ git clone https://github.com/Celidor/aws-security
+
 PS C:\Users\admin> cd aws-security
-PS C:\Users\admin\aws-security> terraform plan
-PS C:\Users\admin\aws-security> terraform apply
+PS C:\Users\admin\aws-security> terraform plan -var 'environment={your_aws_environment_name}'
+PS C:\Users\admin\aws-security> terraform apply -var 'environment={your_aws_environment_name}'
 ```
 
 To destroy the environment:
 
 ```
-PS C:\Users\admin\aws-security> terraform destroy
+PS C:\Users\admin\aws-security> terraform destroy -var 'environment={your_aws_environment_name}'
 ```
