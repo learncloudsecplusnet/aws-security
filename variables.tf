@@ -1,15 +1,11 @@
 variable "aws_key_name" {
-  description = "ssh keypair"
+  description = "ssh key pair name"
   default = "celidor-training"
 }
 
 variable "shared_credentials_file" {
   description = "path to AWS credentials"
   default     = "~\.aws\credentials"
-}
-
-variable "key_name" {
-  description = "Desired name of AWS key pair"
 }
 
 variable "aws_region" {
