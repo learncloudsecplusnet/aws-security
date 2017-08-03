@@ -1,0 +1,9 @@
+#cloud-config
+
+packages:
+ - nginx-full
+
+runcmd:
+ - service nginx start
+
+output: { all: '| tee -a /var/log/cloud-init-output.log' }
