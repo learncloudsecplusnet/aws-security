@@ -38,8 +38,8 @@ resource "aws_subnet" "aws-security" {
 
 # A security group for the ELB so it is accessible via the web
 resource "aws_security_group" "elb" {
-  name        = "terraform_example_elb"
-  description = "Used in the terraform"
+  name        = "${var.environment}-elb-sg"
+  description = "Security group to access ELB from Internet"
   vpc_id      = "${aws_vpc.aws-security.id}"
 
   # HTTP access from anywhere
@@ -66,8 +66,8 @@ resource "aws_security_group" "elb" {
 # Our default security group to access
 # the instances over SSH and HTTP
 resource "aws_security_group" "aws-security" {
-  name        = "terraform_example"
-  description = "Used in the terraform"
+  name        = "${var.environment}-instance-sg"
+  description = "Security group to access instance directly"
   vpc_id      = "${aws_vpc.aws-security.id}"
 
   # SSH access from anywhere
@@ -99,7 +99,7 @@ resource "aws_security_group" "aws-security" {
 }
 
 resource "aws_elb" "web" {
-  name = "terraform-example-elb"
+  name = "${var.environment}-elb"
 
   subnets         = ["${aws_subnet.aws-security.id}"]
   security_groups = ["${aws_security_group.elb.id}"]
