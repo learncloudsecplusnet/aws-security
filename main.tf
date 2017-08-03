@@ -135,7 +135,7 @@ resource "aws_instance" "web" {
   # backend instances.
   subnet_id = "${aws_subnet.aws-security.id}"
 
-  user_data = "${template_file.userdataweb.rendered}"
+  user_data = "${file("user-data-web")}"
 
   tags {
     Name = "${var.environment}"
