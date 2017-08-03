@@ -4,34 +4,46 @@ provider "aws" {
 }
 
 # Create a VPC to launch our instances into
-resource "aws_vpc" "default" {
+resource "aws_vpc" "aws-security" {
   cidr_block = "10.0.0.0/16"
+  tags {
+    Name = "${var.environment}"
+  }
 }
 
 # Create an internet gateway to give our subnet access to the outside world
-resource "aws_internet_gateway" "default" {
-  vpc_id = "${aws_vpc.default.id}"
+resource "aws_internet_gateway" "aws-security" {
+  vpc_id = "${aws_vpc.aws-security.id}"
+  tags {
+    Name = "${var.environment}"
+  }
 }
 
 # Grant the VPC internet access on its main route table
 resource "aws_route" "internet_access" {
-  route_table_id         = "${aws_vpc.default.main_route_table_id}"
+  route_table_id         = "${aws_vpc.aws-security.main_route_table_id}"
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = "${aws_internet_gateway.default.id}"
+  gateway_id             = "${aws_internet_gateway.aws-security.id}"
+  tags {
+    Name = "${var.environment}"
+  }
 }
 
 # Create a subnet to launch our instances into
-resource "aws_subnet" "default" {
-  vpc_id                  = "${aws_vpc.default.id}"
+resource "aws_subnet" "aws-security" {
+  vpc_id                  = "${aws_vpc.aws-security.id}"
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
+  tags {
+    Name = "${var.environment}"
+  }
 }
 
 # A security group for the ELB so it is accessible via the web
 resource "aws_security_group" "elb" {
   name        = "terraform_example_elb"
   description = "Used in the terraform"
-  vpc_id      = "${aws_vpc.default.id}"
+  vpc_id      = "${aws_vpc.aws-security.id}"
 
   # HTTP access from anywhere
   ingress {
@@ -48,14 +60,18 @@ resource "aws_security_group" "elb" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags {
+    Name = "${var.environment}"
+  }
 }
 
 # Our default security group to access
 # the instances over SSH and HTTP
-resource "aws_security_group" "default" {
+resource "aws_security_group" "aws-security" {
   name        = "terraform_example"
   description = "Used in the terraform"
-  vpc_id      = "${aws_vpc.default.id}"
+  vpc_id      = "${aws_vpc.aws-security.id}"
 
   # SSH access from anywhere
   ingress {
@@ -80,12 +96,15 @@ resource "aws_security_group" "default" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags {
+    Name = "${var.environment}"
+  }
 }
 
 resource "aws_elb" "web" {
   name = "terraform-example-elb"
 
-  subnets         = ["${aws_subnet.default.id}"]
+  subnets         = ["${aws_subnet.aws-security.id}"]
   security_groups = ["${aws_security_group.elb.id}"]
   instances       = ["${aws_instance.web.id}"]
 
@@ -94,6 +113,10 @@ resource "aws_elb" "web" {
     instance_protocol = "http"
     lb_port           = 80
     lb_protocol       = "http"
+  }
+
+  tags {
+    Name = "${var.environment}"
   }
 }
 
@@ -108,10 +131,14 @@ resource "aws_instance" "web" {
   key_name = "${var.aws_key_name}"
 
   # Our Security group to allow HTTP and SSH access
-  vpc_security_group_ids = ["${aws_security_group.default.id}"]
+  vpc_security_group_ids = ["${aws_security_group.aws-security.id}"]
 
   # We're going to launch into the same subnet as our ELB. In a production
   # environment it's more common to have a separate private subnet for
   # backend instances.
-  subnet_id = "${aws_subnet.default.id}"
+  subnet_id = "${aws_subnet.aws-security.id}"
+
+  tags {
+    Name = "${var.environment}"
+  }
 }
