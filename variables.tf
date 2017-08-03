@@ -1,16 +1,11 @@
-variable "public_key_path" {
-  description = <<DESCRIPTION
-Path to the SSH public key to be used for authentication.
-Ensure this keypair is added to your local SSH agent so provisioners can
-connect.
-Example: ~/.ssh/terraform.pub
-DESCRIPTION
-  default = "C:\Users\admin\.ssh"
+variable "aws_key_name" {
+  description = "ssh keypair"
+  default = "celidor-training"
 }
 
 variable "shared_credentials_file" {
   description = "path to AWS credentials"
-  default     = "C:\Users\admin\.aws\credentials"
+  default     = "~\.aws\credentials"
 }
 
 variable "key_name" {
@@ -19,7 +14,7 @@ variable "key_name" {
 
 variable "aws_region" {
   description = "AWS region to launch servers."
-  default     = "us-west-2"
+  default     = "eu-west-1"
 }
 
 # Ubuntu Precise 12.04 LTS (x64)
