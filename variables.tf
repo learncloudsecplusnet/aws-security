@@ -5,7 +5,12 @@ variable "aws_key_name" {
 
 variable "shared_credentials_file" {
   description = "path to AWS credentials"
-  default     = "~/.aws/credentials"
+  default     = "~\\.aws\\credentials"
+}
+
+variable "aws_credentials_profile" {
+  description = "profile for AWS credentials"
+  default     = "default"
 }
 
 variable "aws_region" {

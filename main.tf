@@ -1,6 +1,7 @@
 # Specify the provider and access details
 provider "aws" {
   shared_credentials_file = "${var.shared_credentials_file}"
+  profile = "${var.aws_credentials_profile}"
   region = "${var.aws_region}"
 }
 
