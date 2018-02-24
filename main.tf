@@ -8,6 +8,7 @@ resource "aws_vpc" "aws-security" {
   cidr_block = "10.0.0.0/16"
   tags {
     Name = "${var.environment}"
+    Repository = "aws-security"
   }
 }
 
@@ -16,6 +17,7 @@ resource "aws_internet_gateway" "aws-security" {
   vpc_id = "${aws_vpc.aws-security.id}"
   tags {
     Name = "${var.environment}"
+    Repository = "aws-security"
   }
 }
 
@@ -33,6 +35,7 @@ resource "aws_subnet" "aws-security" {
   map_public_ip_on_launch = true
   tags {
     Name = "${var.environment}"
+    Repository = "aws-security"
   }
 }
 
@@ -60,6 +63,7 @@ resource "aws_security_group" "elb" {
 
   tags {
     Name = "${var.environment}"
+    Repository = "aws-security"
   }
 }
 
@@ -95,6 +99,7 @@ resource "aws_security_group" "aws-security" {
   }
   tags {
     Name = "${var.environment}"
+    Repository = "aws-security"
   }
 }
 
@@ -114,6 +119,7 @@ resource "aws_elb" "web" {
 
   tags {
     Name = "${var.environment}"
+    Repository = "aws-security"
   }
 }
 
@@ -152,5 +158,6 @@ resource "aws_instance" "web" {
 
   tags {
     Name = "${var.environment}"
+    Repository = "aws-security"
   }
 }
