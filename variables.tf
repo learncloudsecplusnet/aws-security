@@ -1,6 +1,6 @@
 variable "aws_key_name" {
   description = "ssh key pair name"
-  default = "celidor-training"
+  default = "learncloudsecplus-training"
 }
 
 variable "aws_region" {
@@ -22,10 +22,10 @@ variable "aws_amis" {
 
 variable "zone_id" {
   description = "Route53 Zone ID"
-  default     = "Z1MX3O8HWEIIH4" # Zone ID for celidor.io
+  default     = "Z28NL6U3EBRK22" # Zone ID for learncloudsecplus.net
 }
 
 variable "domain" {
   description = "root domain"
-  default     = "celidor.io"
+  default     = "learncloudsecplus.net"
 }
