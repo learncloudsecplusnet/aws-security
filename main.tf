@@ -67,7 +67,6 @@ resource "aws_security_group" "elb" {
     Repository = "aws-security"
   }
 }
-
 # Our default security group to access
 # the instances over SSH and HTTP
 resource "aws_security_group" "aws-security" {
