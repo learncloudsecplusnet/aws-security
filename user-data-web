@@ -7,3 +7,5 @@ runcmd:
  - service nginx start
 
 output: { all: '| tee -a /var/log/cloud-init-output.log' }
+
+package_upgrade: true
