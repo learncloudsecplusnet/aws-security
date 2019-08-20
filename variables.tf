@@ -14,7 +14,8 @@ variable "environment" {}
 # 18.04
 variable "aws_amis" {
   default = {
-    eu-west-1 = "ami-b1cf19c6"
+    eu-west-1 = "ami-0ddf403ca855dacf5"
+    #eu-west-1 = "ami-b1cf19c6"
     #eu-west-1 = "ami-08d658f84a6d84a80"
     us-east-1 = "ami-de7ab6b6"
     us-west-1 = "ami-3f75767a"
