@@ -5,6 +5,8 @@ packages:
 
 runcmd:
  - service nginx start
+ - apt-get update -y
+ - apt-get install tree elinks -y
 
 output: { all: '| tee -a /var/log/cloud-init-output.log' }
 
