@@ -75,16 +75,12 @@ resource "aws_security_group" "aws-security" {
   description = "Security group to access instance directly"
   vpc_id      = "${aws_vpc.aws-security.id}"
 
-  # SSH access from lab PC
+  # SSH access from anywhere
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-<<<<<<< HEAD
-    cidr_blocks = ["80.194.39.211/32"]
-=======
-    cidr_blocks = ["${var.management_source_subnet}"]
->>>>>>> 94858a862c6eb8dbcdcb255c5ab290ecb10df4c3
+    cidr_blocks = ["80.194.39.211/0"]
   }
 
   # HTTP access from the VPC
