@@ -34,5 +34,5 @@ variable "domain" {
 
 variable "ssh_ip"{
   description = "SSH IP allow"
-  default = "212.250.100.150/32"
+  default = "80.194.39.211/32"
 }
