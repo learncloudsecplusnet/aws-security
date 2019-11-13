@@ -7,8 +7,9 @@ provider "aws" {
 # Create a VPC to launch our instances into
 resource "aws_vpc" "aws-security" {
   cidr_block = "10.0.0.0/16"
+
   tags {
-    Name = "${var.environment}"
+    Name       = "${var.environment}"
     Repository = "aws-security"
   }
 }
@@ -16,8 +17,9 @@ resource "aws_vpc" "aws-security" {
 # Create an internet gateway to give our subnet access to the outside world
 resource "aws_internet_gateway" "aws-security" {
   vpc_id = "${aws_vpc.aws-security.id}"
+
   tags {
-    Name = "${var.environment}"
+    Name       = "${var.environment}"
     Repository = "aws-security"
   }
 }
@@ -34,8 +36,9 @@ resource "aws_subnet" "aws-security" {
   vpc_id                  = "${aws_vpc.aws-security.id}"
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
+
   tags {
-    Name = "${var.environment}"
+    Name       = "${var.environment}"
     Repository = "aws-security"
   }
 }
@@ -63,7 +66,7 @@ resource "aws_security_group" "elb" {
   }
 
   tags {
-    Name = "${var.environment}"
+    Name       = "${var.environment}"
     Repository = "aws-security"
   }
 }
@@ -80,7 +83,7 @@ resource "aws_security_group" "aws-security" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["212.250.100.150/32"]
   }
 
   # HTTP access from the VPC
@@ -98,8 +101,9 @@ resource "aws_security_group" "aws-security" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
   tags {
-    Name = "${var.environment}"
+    Name       = "${var.environment}"
     Repository = "aws-security"
   }
 }
@@ -119,7 +123,7 @@ resource "aws_elb" "web" {
   }
 
   tags {
-    Name = "${var.environment}"
+    Name       = "${var.environment}"
     Repository = "aws-security"
   }
 }
@@ -158,7 +162,7 @@ resource "aws_instance" "web" {
   user_data = "${file("user-data-web")}"
 
   tags {
-    Name = "${var.environment}"
+    Name       = "${var.environment}"
     Repository = "aws-security"
   }
 }
