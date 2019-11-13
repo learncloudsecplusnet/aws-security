@@ -32,7 +32,7 @@ variable "domain" {
   default     = "learncloudsecplus.net"
 }
 
-variable "ssh_ip"{
+variable "ssh_ip" {
   description = "SSH IP allow"
   default = "212.250.100.150/32"
 }
